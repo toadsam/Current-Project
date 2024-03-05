@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    // UI ÅØ½ºÆ® ¿ÀºêÁ§Æ®
+    // UI í…ìŠ¤íŠ¸ ì˜¤ë¸Œì íŠ¸
     private Transform interactionText;
     [SerializeField] private GameObject objectCamera;
     [SerializeField] private GameObject cameraUI;
@@ -11,54 +11,66 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // »óÈ£ÀÛ¿ë °¡´ÉÇÑ ¹°Ã¼ÀÇ ÅÂ±×¸¦ È®ÀÎ
+        // ìƒí˜¸ì‘ìš© ê°€ëŠ¥í•œ ë¬¼ì²´ì˜ íƒœê·¸ë¥¼ í™•ì¸
         if (other.CompareTag("Interaction"))
         {
             if (other.transform.childCount > 0)
             {
                 interactionText = other.transform.GetChild(0);
                 cameraPosition = other.transform.GetChild(1);
-                // °¡Á®¿Â Ã¹ ¹øÂ° ÀÚ½Ä¿¡ ´ëÇÑ ÀÛ¾÷À» ¼öÇà
+                // ê°€ì ¸ì˜¨ ì²« ë²ˆì§¸ ìì‹ì— ëŒ€í•œ ì‘ì—…ì„ ìˆ˜í–‰
             }
             else
             {
-                Debug.Log("¾ø½À´Ï´Ù");
+                Debug.Log("ì—†ìŠµë‹ˆë‹¤");
                 return;
             }
-            // UI ÅØ½ºÆ®¸¦ È°¼ºÈ­ÇÏ¿© »óÈ£ÀÛ¿ë °¡´É ¹®±¸¸¦ Ç¥½Ã
+            // UI í…ìŠ¤íŠ¸ë¥¼ í™œì„±í™”í•˜ì—¬ ìƒí˜¸ì‘ìš© ê°€ëŠ¥ ë¬¸êµ¬ë¥¼ í‘œì‹œ
             interactionText.gameObject.SetActive(true);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // ¹°Ã¼¿ÍÀÇ Ãæµ¹ÀÌ Á¾·áµÉ ¶§ UI ÅØ½ºÆ® ºñÈ°¼ºÈ­
+        // ë¬¼ì²´ì™€ì˜ ì¶©ëŒì´ ì¢…ë£Œë  ë•Œ UI í…ìŠ¤íŠ¸ ë¹„í™œì„±í™”
         interactionText.gameObject.SetActive(false);
     }
 
     private void Update()
     {
-        // ¸¶¿ì½º ¿ŞÂÊ ¹öÆ° Å¬¸¯ °¨Áö
+        // ë§ˆìš°ìŠ¤ ì™¼ìª½ ë²„íŠ¼ í´ë¦­ ê°ì§€
         if (Input.GetMouseButtonDown(0))
         {
-            // UI ÅØ½ºÆ®°¡ È°¼ºÈ­µÇ¾î ÀÖ°í, ¸¶¿ì½º ¿ŞÂÊ ¹öÆ°ÀÌ Å¬¸¯µÇ¸é »óÈ£ÀÛ¿ë ½ÃÀÛ
-            if (interactionText.gameObject.activeSelf)
+            if (interactionText != null)
             {
-                StartInteraction();
+                // UI í…ìŠ¤íŠ¸ê°€ í™œì„±í™”ë˜ì–´ ìˆê³ , ë§ˆìš°ìŠ¤ ì™¼ìª½ ë²„íŠ¼ì´ í´ë¦­ë˜ë©´ ìƒí˜¸ì‘ìš© ì‹œì‘
+                if (interactionText.gameObject.activeSelf)
+                {
+                    StartInteraction();
+                }
             }
-        }
+            else
+            {
+                return;
+            }
+
+
+
+
+
+        } 
     }
 
     private void StartInteraction()
     {
-        // »óÈ£ÀÛ¿ë µ¿ÀÛ ½ÇÇà
-        Debug.Log("»óÈ£ÀÛ¿ë ½ÃÀÛ!");
+        // ìƒí˜¸ì‘ìš© ë™ì‘ ì‹¤í–‰
+        Debug.Log("ìƒí˜¸ì‘ìš© ì‹œì‘!");
         if(cameraPosition != null)
         {
             objectCamera.transform.position = cameraPosition.position;
             cameraUI.SetActive(true);
         }
-        //¿©±â ºÎºĞ¿¡ À§Ä¡¸¦ Ä«¸Ş¶óÀÇ À§Ä¡¸¦ ¹Ş°í Ä«¸Ş¶ó¸¦ ¿Å±ä´Ù.
+        //ì—¬ê¸° ë¶€ë¶„ì— ìœ„ì¹˜ë¥¼ ì¹´ë©”ë¼ì˜ ìœ„ì¹˜ë¥¼ ë°›ê³  ì¹´ë©”ë¼ë¥¼ ì˜®ê¸´ë‹¤.
 
     }
 }
