@@ -1,13 +1,23 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
     // UI 텍스트 오브젝트
+  //  public PlayerInput Input { get; private set; }
+    public PlayerInputActions InputActions { get; private set; }
     private Transform interactionText;
     [SerializeField] private GameObject objectCamera;
     [SerializeField] private GameObject cameraUI;
     private Transform cameraPosition;
+
+    private void Awake()
+    {
+        InputActions = new PlayerInputActions();
+        //  Input = GetComponent<PlayerInput>();
+        InputActions.Player.Exit.performed += ctx => OnEscapePressed();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -38,27 +48,47 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        // 마우스 왼쪽 버튼 클릭 감지
+       // 마우스 왼쪽 버튼 클릭 감지
         if (Input.GetMouseButtonDown(0))
         {
-            if (interactionText != null)
+        if (interactionText != null)
+        {
+            // UI 텍스트가 활성화되어 있고, 마우스 왼쪽 버튼이 클릭되면 상호작용 시작
+            if (interactionText.gameObject.activeSelf)
             {
-                // UI 텍스트가 활성화되어 있고, 마우스 왼쪽 버튼이 클릭되면 상호작용 시작
-                if (interactionText.gameObject.activeSelf)
-                {
-                    StartInteraction();
-                }
+                StartInteraction();
             }
-            else
-            {
-                return;
-            }
-
-
-
-
-
+        }
+        else
+        {
+            return;
+        }
+        
+        
+        
+        
+        
         } 
+    }
+    // public void OnMovementCanceled(InputAction.CallbackContext context)
+    // {
+    //
+    // }
+    private void OnInteraction()
+    {
+        Debug.Log("나 누르는 중");
+        if (interactionText != null)
+        {
+            // UI 텍스트가 활성화되어 있고, 마우스 왼쪽 버튼이 클릭되면 상호작용 시작
+            if (interactionText.gameObject.activeSelf)
+            {
+                StartInteraction();
+            }
+        }
+        else
+        {
+            return;
+        }
     }
 
     private void StartInteraction()
@@ -72,5 +102,10 @@ public class PlayerInteraction : MonoBehaviour
         }
         //여기 부분에 위치를 카메라의 위치를 받고 카메라를 옮긴다.
 
+    }
+    private void OnEscapePressed()
+    {
+        Debug.Log("ESC 키가 눌렸습니다.");
+        // ESC 키가 눌렸을 때 수행되어야 하는 동작을 여기에 추가합니다.
     }
 }
