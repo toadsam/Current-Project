@@ -14,7 +14,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         InputActions = new PlayerInputActions();
         InputActions.Player.Exit.performed += ctx => OnEscapePressed();
-        InputActions.Player.Interaction.performed += ctx => OnInteraction();
+     //   InputActions.Player.Interaction.performed += ctx => OnInteraction();
     }
     
     private void OnEnable()
@@ -57,7 +57,7 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     
-    private void OnInteraction()
+    public void OnInteraction()
     {
         Debug.Log("나 누르는 중");
         if (interactionText != null)
