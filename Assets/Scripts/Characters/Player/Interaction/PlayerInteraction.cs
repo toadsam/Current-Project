@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     public PlayerInputActions InputActions { get; private set; }
-    private Transform interactionText;
+    [SerializeField] private GameObject interactionText;
     [SerializeField] private GameObject objectCamera;
     [SerializeField] private GameObject cameraUI;
     private Transform cameraPosition;
@@ -36,8 +36,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (other.transform.childCount > 0)
             {
-                interactionText = other.transform.GetChild(0);
-                cameraPosition = other.transform.GetChild(1);
+                //interactionText = other.transform.GetChild(0);
+                cameraPosition = other.transform.GetChild(0);
                 // 가져온 첫 번째 자식에 대한 작업을 수행
             }
             else
@@ -60,18 +60,19 @@ public class PlayerInteraction : MonoBehaviour
     public void OnInteraction()
     {
         Debug.Log("나 누르는 중");
-        if (interactionText != null)
-        {
-            // UI 텍스트가 활성화되어 있고, 마우스 왼쪽 버튼이 클릭되면 상호작용 시작
-            if (interactionText.gameObject.activeSelf)
-            {
-                StartInteraction();
-            }
-        }
-        else
-        {
-            return;
-        }
+        StartInteraction();
+        // if (interactionText != null)
+        // {
+        //     // UI 텍스트가 활성화되어 있고, 마우스 왼쪽 버튼이 클릭되면 상호작용 시작
+        //     if (interactionText.gameObject.activeSelf)
+        //     {
+        //         StartInteraction();
+        //     }
+        // }
+        // else
+        // {
+        //     return;
+        // }
     }
 
     private void StartInteraction()
