@@ -1,13 +1,33 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    // UI 텍스트 오브젝트
-    private Transform interactionText;
+    public PlayerInputActions InputActions { get; private set; }
+    [SerializeField] private GameObject interactionText;
     [SerializeField] private GameObject objectCamera;
     [SerializeField] private GameObject cameraUI;
     private Transform cameraPosition;
+
+    private void Awake()
+    {
+        InputActions = new PlayerInputActions();
+        InputActions.Player.Exit.performed += ctx => OnEscapePressed();
+     //   InputActions.Player.Interaction.performed += ctx => OnInteraction();
+    }
+    
+    private void OnEnable()
+    {
+        // Input 시스템 활성화
+        InputActions.Enable();
+    }
+    
+    private void OnDisable()
+    {
+        // Input 시스템 비활성화
+        InputActions.Disable();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,8 +36,8 @@ public class PlayerInteraction : MonoBehaviour
         {
             if (other.transform.childCount > 0)
             {
-                interactionText = other.transform.GetChild(0);
-                cameraPosition = other.transform.GetChild(1);
+                //interactionText = other.transform.GetChild(0);
+                cameraPosition = other.transform.GetChild(0);
                 // 가져온 첫 번째 자식에 대한 작업을 수행
             }
             else
@@ -36,29 +56,23 @@ public class PlayerInteraction : MonoBehaviour
         interactionText.gameObject.SetActive(false);
     }
 
-    private void Update()
+    
+    public void OnInteraction()
     {
-        // 마우스 왼쪽 버튼 클릭 감지
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (interactionText != null)
-            {
-                // UI 텍스트가 활성화되어 있고, 마우스 왼쪽 버튼이 클릭되면 상호작용 시작
-                if (interactionText.gameObject.activeSelf)
-                {
-                    StartInteraction();
-                }
-            }
-            else
-            {
-                return;
-            }
-
-
-
-
-
-        } 
+        Debug.Log("나 누르는 중");
+        StartInteraction();
+        // if (interactionText != null)
+        // {
+        //     // UI 텍스트가 활성화되어 있고, 마우스 왼쪽 버튼이 클릭되면 상호작용 시작
+        //     if (interactionText.gameObject.activeSelf)
+        //     {
+        //         StartInteraction();
+        //     }
+        // }
+        // else
+        // {
+        //     return;
+        // }
     }
 
     private void StartInteraction()
@@ -72,5 +86,15 @@ public class PlayerInteraction : MonoBehaviour
         }
         //여기 부분에 위치를 카메라의 위치를 받고 카메라를 옮긴다.
 
+    }
+    private void OnEscapePressed()
+    {
+        Debug.Log("ESC 키가 눌렸습니다.");
+        if(cameraPosition != null)
+        {
+            //objectCamera.transform.position = cameraPosition.position;
+            cameraUI.SetActive(false);
+        }
+        // ESC 키가 눌렸을 때 수행되어야 하는 동작을 여기에 추가합니다.
     }
 }

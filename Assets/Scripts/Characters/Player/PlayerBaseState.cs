@@ -115,8 +115,8 @@ public class PlayerBaseState : IState
 
         stateMachine.Player.Input.PlayerActions.Jump.started += OnJumpStarted;
 
-        stateMachine.Player.Input.PlayerActions.Interaction.performed += OnInteractionPerformed;
-        stateMachine.Player.Input.PlayerActions.Interaction.canceled += OnInteractionPerformed;
+        // stateMachine.Player.Input.PlayerActions.Interaction.performed += OnInteractionPerformed;
+        // stateMachine.Player.Input.PlayerActions.Interaction.canceled += OnInteractionPerformed;
 
         //stateMachine.Player.Input.PlayerActions.Attack.performed += OnAttackPerformed;
         //stateMachine.Player.Input.PlayerActions.Attack.canceled += OnAttackCanceled;
@@ -130,8 +130,8 @@ public class PlayerBaseState : IState
 
         stateMachine.Player.Input.PlayerActions.Jump.started -= OnJumpStarted;
 
-        stateMachine.Player.Input.PlayerActions.Interaction.performed -= OnInteractionPerformed;
-        stateMachine.Player.Input.PlayerActions.Interaction.canceled -= OnInteractionPerformed;
+        // stateMachine.Player.Input.PlayerActions.Interaction.performed -= OnInteractionPerformed;
+        // stateMachine.Player.Input.PlayerActions.Interaction.canceled -= OnInteractionPerformed;
 
         //stateMachine.Player.Input.PlayerActions.Attack.performed -= OnAttackPerformed;
         //stateMachine.Player.Input.PlayerActions.Attack.canceled -= OnAttackCanceled;
