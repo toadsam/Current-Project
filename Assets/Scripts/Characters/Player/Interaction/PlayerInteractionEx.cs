@@ -1,7 +1,21 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
+public static class ExtensionMethods
+{
+	public static void AddListener (this EventTrigger trigger, EventTriggerType eventType, System.Action<PointerEventData> listener)
+	{
+		EventTrigger.Entry entry = new EventTrigger.Entry();
+		entry.eventID = eventType;
+		entry.callback.AddListener(data => listener.Invoke((PointerEventData)data));
+		trigger.triggers.Add(entry);
+	}
+}
 
 public class PlayerInteractionEx : MonoBehaviour
 {
@@ -17,7 +31,12 @@ public class PlayerInteractionEx : MonoBehaviour
     private Vector3 maxBound;
     private Vector3 originalCameraPosition;
 
-    private Color originalBackgroundColor; // 기존 배경 색상 저장
+    //private Ray ray;
+    private RaycastHit[] ratHits;
+    public float MAX_RAY_DISTANCE = 500f;
+
+    [SerializeField] private RectTransform renderTextureUI; // Render Texture를 가지고 있는 UI 요소의 RectTransform
+    [SerializeField]private RenderTexture renderTexture; // Render Texture
 
     private void Awake()
     {
@@ -25,13 +44,33 @@ public class PlayerInteractionEx : MonoBehaviour
         InputActions.Player.Exit.performed += ctx => OnEscapePressed();
      //   InputActions.Player.Interaction.performed += ctx => OnInteraction();
         cameraObj = objectCamera.GetComponent<Camera>();
-        originalBackgroundColor = cameraObj.backgroundColor;
+        interactionText.GetComponent<Button>().onClick.AddListener(OnInteraction);
+
+        //cameraUI.GetComponent<EventTrigger>().AddListener(EventTriggerType.PointerClick, OnClick);
+
+        renderTextureUI = objectCamera.GetComponent<RectTransform>();
+        renderTexture = objectCamera.GetComponent<Camera>().targetTexture;
     }
     
     void Update()
     {
         if(cameraObj.orthographicSize == 0.5f)
             MovingCamera();
+        // ray = objectCamera.GetComponent<Camera>().ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // 카메라 뷰포트의 중심에서 레이 생성
+        
+        // ratHits = Physics.RaycastAll(ray, MAX_RAY_DISTANCE); // 모든 충돌 정보를 가져옴
+
+        // foreach (RaycastHit hit in ratHits)
+        // {
+        //     if (!hit.collider.CompareTag("Interaction"))
+        //     {
+        //         Debug.DrawLine(ray.origin, hit.point, Color.green); // 레이의 충돌 지점까지 초록색 라인을 그려줌 (디버그용)
+        //         // Debug.Log("캐릭터가 보고 있는 오브젝트 이름: " + hit.collider.gameObject.name); // 디버그 로그 출력
+                
+        //         break; // 첫 번째로 발견한 "add" 태그를 가진 오브젝트만 처리하고 루프 종료
+                
+        //     }
+        // }
     }
 
     private void OnEnable()
@@ -77,6 +116,7 @@ public class PlayerInteractionEx : MonoBehaviour
     public void OnInteraction()
     {
         Debug.Log("나 누르는 중");
+        interactionText.gameObject.SetActive(false);
         StartInteraction();
         // if (interactionText != null)
         // {
@@ -100,8 +140,6 @@ public class PlayerInteractionEx : MonoBehaviour
         {
             objectCamera.transform.position = cameraPosition.position;
             originalCameraPosition = objectCamera.transform.position;
-            originalBackgroundColor = cameraObj.backgroundColor;
-            SetCameraBackground(Color.black);
             cameraUI.SetActive(true);
 
             float halfOrthographicSize = cameraObj.orthographicSize / 2f;
@@ -113,11 +151,6 @@ public class PlayerInteractionEx : MonoBehaviour
 
         //여기 부분에 위치를 카메라의 위치를 받고 카메라를 옮긴다.
 
-    }
-
-    private void SetCameraBackground(Color color)
-    {
-        cameraObj.backgroundColor = color;
     }
 
     private void MovingCamera()
@@ -142,10 +175,54 @@ public class PlayerInteractionEx : MonoBehaviour
         objectCamera.transform.position = newPosition;
     }
 
+    private void OnClick(PointerEventData eventData)
+    {
+        if(!focusInteraction)
+        {
+            // 클릭된 UI 요소의 스크린 좌표를 가져옵니다.
+            Vector2 screenPoint = eventData.position;
+
+            // 스크린 좌표를 월드 좌표로 변환합니다.
+            Ray ray = objectCamera.GetComponent<Camera>().ScreenPointToRay(screenPoint);
+            RaycastHit hit;
+
+            Debug.Log("ray 크기" + ray);
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                objectCamera.transform.position = hit.point;
+                cameraObj.orthographicSize = 0.5f;
+                focusInteraction = true;
+                // 클릭된 지점의 월드 좌표를 출력합니다.
+                Debug.DrawLine(ray.origin, hit.point, Color.green);
+                Debug.Log("클릭된 위치의 월드 좌표: " + hit.point);
+            }
+            else
+            {
+                Debug.DrawLine(ray.origin, hit.point, Color.red);
+                Debug.Log("레이캐스트에 의한 충돌이 없습니다.");
+            }
+        }
+    }
+
     public void StartFocusInteraction()
     {
         if(!focusInteraction)
         {
+            // 클릭한 위치의 스크린 좌표를 가져옴
+            Vector3 clickPosition = Input.mousePosition;
+
+            Vector3 viewportPosition = cameraObj.ScreenToViewportPoint(clickPosition);
+            
+
+            Vector3 worldPosition = cameraObj.ViewportToWorldPoint(new Vector3(viewportPosition.x, viewportPosition.y, cameraObj.transform.position.z));
+
+            Debug.Log($"이동 전 카메라 위치: {cameraObj.transform.position}");
+
+            // 카메라 이동
+            cameraObj.transform.position = new Vector3(worldPosition.x, worldPosition.y, cameraObj.transform.position.z);
+            Debug.Log($"이동 후 카메라 위치: {cameraObj.transform.position}");
+
             cameraObj.orthographicSize = 0.5f;
             focusInteraction = true;
         }
@@ -160,7 +237,6 @@ public class PlayerInteractionEx : MonoBehaviour
             cameraUI.SetActive(false);
             cameraObj.orthographicSize = 1f;
             focusInteraction = false;
-            cameraObj.backgroundColor = originalBackgroundColor;
         }
         // ESC 키가 눌렸을 때 수행되어야 하는 동작을 여기에 추가합니다.
     }
