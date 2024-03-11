@@ -54,9 +54,9 @@ public class CameraRays : MonoBehaviour
         
         void ExecuteFunction(Vector3 hitPoint)
         {
-            Debug.Log("초록색 레이캐스트가 2초 이상 지속되었습니다!");
-            Debug.Log("닿은 물체의 위치: " + hitPoint);
-            FocusCamera.transform.position = hitPoint + new Vector3(0, 4, 0);
+          //  Debug.Log("초록색 레이캐스트가 2초 이상 지속되었습니다!");
+           // Debug.Log("닿은 물체의 위치: " + hitPoint);
+            //FocusCamera.transform.position = hitPoint + new Vector3(0, 4, 0);
             // 여기에 실행할 함수의 내용을 추가
         }
     }
