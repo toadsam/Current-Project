@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -342,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1264127105196670, guid: 1e3861f9ad1beae4eadd9ad081712f57, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: FocusObject
       objectReference: {fileID: 0}
     - target: {fileID: 4232250064891754, guid: 1e3861f9ad1beae4eadd9ad081712f57, type: 3}
       propertyPath: m_RootOrder
@@ -800,6 +800,10 @@ PrefabInstance:
     - target: {fileID: 1859234679933314, guid: 4700ce61fd21e32439977dd4e8211f37, type: 3}
       propertyPath: m_Name
       value: SM_Wep_Bullet_Ammo_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1859234679933314, guid: 4700ce61fd21e32439977dd4e8211f37, type: 3}
+      propertyPath: m_TagString
+      value: FocusObject
       objectReference: {fileID: 0}
     - target: {fileID: 4084649257871824, guid: 4700ce61fd21e32439977dd4e8211f37, type: 3}
       propertyPath: m_RootOrder
@@ -2012,6 +2016,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Wep_Bullet_Ammo_Box_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1495748077833478, guid: d7ceda7b4977dfd49b6b551566265733, type: 3}
+      propertyPath: m_TagString
+      value: FocusObject
+      objectReference: {fileID: 0}
     - target: {fileID: 4705198821467490, guid: d7ceda7b4977dfd49b6b551566265733, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -2346,6 +2354,10 @@ PrefabInstance:
     - target: {fileID: 1232985492454154, guid: 65220ff33a543ac45bc528238f48a1c1, type: 3}
       propertyPath: m_Name
       value: SM_Wep_Crosshair_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1232985492454154, guid: 65220ff33a543ac45bc528238f48a1c1, type: 3}
+      propertyPath: m_TagString
+      value: FocusObject
       objectReference: {fileID: 0}
     - target: {fileID: 4351587022494898, guid: 65220ff33a543ac45bc528238f48a1c1, type: 3}
       propertyPath: m_RootOrder
@@ -2706,6 +2718,7 @@ GameObject:
   - component: {fileID: 1905901253}
   - component: {fileID: 1905901252}
   - component: {fileID: 1905901251}
+  - component: {fileID: 1905901254}
   m_Layer: 0
   m_Name: ObjectCamera
   m_TagString: Untagged
@@ -2787,6 +2800,21 @@ Transform:
   m_Father: {fileID: 1767992748}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1905901254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905901250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef81130fd455bcf44a3235d8ed067519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1905901252}
+  MAX_RAY_DISTANCE: 500
+  GREEN_RAY_THRESHOLD: 2
 --- !u!1 &1919014599
 GameObject:
   m_ObjectHideFlags: 0
@@ -3113,7 +3141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1323953794843828, guid: 586bb7eb152304c49b7fc8d4f71bec36, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: FocusObject
       objectReference: {fileID: 0}
     - target: {fileID: 4198019662963126, guid: 586bb7eb152304c49b7fc8d4f71bec36, type: 3}
       propertyPath: m_RootOrder
