@@ -497,7 +497,6 @@ GameObject:
   - component: {fileID: 487240003}
   - component: {fileID: 487240002}
   - component: {fileID: 487240004}
-  - component: {fileID: 487240005}
   m_Layer: 5
   m_Name: CameraUI
   m_TagString: Untagged
@@ -577,20 +576,6 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
---- !u!114 &487240005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 487240000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14c632aa1b8594c5aa52444aa5ebeac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderTextureCamera: {fileID: 1905901252}
-  focusInteraction: 0
 --- !u!1 &502629646 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1264127105196670, guid: 1e3861f9ad1beae4eadd9ad081712f57, type: 3}
@@ -861,7 +846,6 @@ MonoBehaviour:
   interactionText: {fileID: 1457635214}
   objectCamera: {fileID: 1905901250}
   cameraUI: {fileID: 487240000}
-  MAX_RAY_DISTANCE: 500
   renderTextureUI: {fileID: 0}
   renderTexture: {fileID: 0}
 --- !u!1 &671817543
