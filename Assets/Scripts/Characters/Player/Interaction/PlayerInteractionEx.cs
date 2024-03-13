@@ -160,6 +160,8 @@ public class PlayerInteractionEx : MonoBehaviour
     {
         if(!focusInteraction)
         {
+            Camera.main.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = true;
+            cameraObj.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = true;
 
             Vector2 screenPoint = eventData.position;
 
@@ -194,6 +196,8 @@ public class PlayerInteractionEx : MonoBehaviour
             cameraUI.SetActive(false);
             cameraObj.orthographicSize = 1f;
             focusInteraction = false;
+            Camera.main.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = false;
+            cameraObj.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = false;
         }
         // ESC 키가 눌렸을 때 수행되어야 하는 동작을 여기에 추가합니다.
     }
