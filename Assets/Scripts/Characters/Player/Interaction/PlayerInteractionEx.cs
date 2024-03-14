@@ -125,7 +125,7 @@ public class PlayerInteractionEx : MonoBehaviour
             float halfOrthographicSize = cameraObj.orthographicSize / 2f;
 
             minBound = new Vector3(originalCameraPosition.x - halfOrthographicSize, originalCameraPosition.y - halfOrthographicSize, originalCameraPosition.z - halfOrthographicSize);
-            maxBound = new Vector3(originalCameraPosition.x + halfOrthographicSize, originalCameraPosition.y + halfOrthographicSize, originalCameraPosition.z - halfOrthographicSize);
+            maxBound = new Vector3(originalCameraPosition.x + halfOrthographicSize, originalCameraPosition.y + halfOrthographicSize, originalCameraPosition.z + halfOrthographicSize);
         }
         
 
@@ -140,10 +140,12 @@ public class PlayerInteractionEx : MonoBehaviour
 
         Vector3 movement;
 
-        if (objectCamera.transform.rotation.eulerAngles == new Vector3(90,0,0))
+        if (Quaternion.Euler(90, 0, 0).Equals(objectCamera.transform.rotation))
             movement = new Vector3(horizontalInput, 0f, verticalInput) * 2f * Time.deltaTime;
         else
             movement = new Vector3(horizontalInput, verticalInput, 0f) * 2f * Time.deltaTime;
+
+        Debug.Log("Movement Vector: " + movement);
 
         // 월드 좌표 기준으로 이동
         movement = objectCamera.transform.TransformDirection(movement);
