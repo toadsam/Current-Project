@@ -26,26 +26,24 @@ public class PlayerInteractionEx : MonoBehaviour
     private Transform cameraPosition;
 
     private Camera cameraObj;
+
+    //focus 상호작용 관련 변수
     private bool focusInteraction;
-    private Vector3 minBound; // 제한할 구역의 최소 지점
+    private Vector3 minBound;
     private Vector3 maxBound;
     private Vector3 originalCameraPosition;
-
-    [SerializeField] private RectTransform renderTextureUI; // Render Texture를 가지고 있는 UI 요소의 RectTransform
-    [SerializeField]private RenderTexture renderTexture; // Render Texture
+    private RenderTexture renderTexture;
 
     private void Awake()
     {
         InputActions = new PlayerInputActions();
         InputActions.Player.Exit.performed += ctx => OnEscapePressed();
-     //   InputActions.Player.Interaction.performed += ctx => OnInteraction();
+
         cameraObj = objectCamera.GetComponent<Camera>();
-        interactionText.GetComponent<Button>().onClick.AddListener(OnInteraction);
-
-        cameraUI.GetComponent<EventTrigger>().AddListener(EventTriggerType.PointerClick, OnClick);
-
-        renderTextureUI = cameraUI.GetComponent<RectTransform>();
         renderTexture = objectCamera.GetComponent<Camera>().targetTexture;
+
+        interactionText.GetComponent<Button>().onClick.AddListener(OnInteraction);
+        cameraUI.GetComponent<EventTrigger>().AddListener(EventTriggerType.PointerClick, OnClick);
     }
     
     void Update()
@@ -120,13 +118,14 @@ public class PlayerInteractionEx : MonoBehaviour
         if(cameraPosition != null)
         {
             objectCamera.transform.position = cameraPosition.position;
+            objectCamera.transform.rotation = cameraPosition.rotation;
             originalCameraPosition = objectCamera.transform.position;
             cameraUI.SetActive(true);
 
             float halfOrthographicSize = cameraObj.orthographicSize / 2f;
 
-            minBound = new Vector3(originalCameraPosition.x - halfOrthographicSize, originalCameraPosition.y - halfOrthographicSize, originalCameraPosition.z);
-            maxBound = new Vector3(originalCameraPosition.x + halfOrthographicSize, originalCameraPosition.y + halfOrthographicSize, originalCameraPosition.z);
+            minBound = new Vector3(originalCameraPosition.x - halfOrthographicSize, originalCameraPosition.y - halfOrthographicSize, originalCameraPosition.z - halfOrthographicSize);
+            maxBound = new Vector3(originalCameraPosition.x + halfOrthographicSize, originalCameraPosition.y + halfOrthographicSize, originalCameraPosition.z + halfOrthographicSize);
         }
         
 
@@ -139,7 +138,14 @@ public class PlayerInteractionEx : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontalInput, verticalInput, 0f) * 2f * Time.deltaTime;
+        Vector3 movement;
+
+        if (Quaternion.Euler(90, 0, 0).Equals(objectCamera.transform.rotation))
+            movement = new Vector3(horizontalInput, 0f, verticalInput) * 2f * Time.deltaTime;
+        else
+            movement = new Vector3(horizontalInput, verticalInput, 0f) * 2f * Time.deltaTime;
+
+        Debug.Log("Movement Vector: " + movement);
 
         // 월드 좌표 기준으로 이동
         movement = objectCamera.transform.TransformDirection(movement);
@@ -150,7 +156,7 @@ public class PlayerInteractionEx : MonoBehaviour
         // 이동한 위치를 특정 구역 내에 제한
         newPosition.x = Mathf.Clamp(newPosition.x, minBound.x, maxBound.x);
         newPosition.y = Mathf.Clamp(newPosition.y, minBound.y, maxBound.y);
-        // newPosition.z = Mathf.Clamp(newPosition.z, minBound.z, maxBound.z);
+        newPosition.z = Mathf.Clamp(newPosition.z, minBound.z, maxBound.z);
 
         // 실제로 이동
         objectCamera.transform.position = newPosition;
@@ -160,6 +166,8 @@ public class PlayerInteractionEx : MonoBehaviour
     {
         if(!focusInteraction)
         {
+            Camera.main.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = true;
+            cameraObj.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = true;
 
             Vector2 screenPoint = eventData.position;
 
@@ -172,7 +180,6 @@ public class PlayerInteractionEx : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                // 클릭된 지점의 월드 좌표를 출력합니다.
                 Debug.Log("클릭된 위치의 월드 좌표: " + hit.point);
                 cameraObj.transform.position = hit.point;
 
@@ -194,6 +201,8 @@ public class PlayerInteractionEx : MonoBehaviour
             cameraUI.SetActive(false);
             cameraObj.orthographicSize = 1f;
             focusInteraction = false;
+            Camera.main.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = false;
+            cameraObj.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = false;
         }
         // ESC 키가 눌렸을 때 수행되어야 하는 동작을 여기에 추가합니다.
     }
