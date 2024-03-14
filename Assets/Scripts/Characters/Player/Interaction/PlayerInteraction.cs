@@ -61,18 +61,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         Debug.Log("나 누르는 중");
         StartInteraction();
-        // if (interactionText != null)
-        // {
-        //     // UI 텍스트가 활성화되어 있고, 마우스 왼쪽 버튼이 클릭되면 상호작용 시작
-        //     if (interactionText.gameObject.activeSelf)
-        //     {
-        //         StartInteraction();
-        //     }
-        // }
-        // else
-        // {
-        //     return;
-        // }
     }
 
     private void StartInteraction()
@@ -98,3 +86,4 @@ public class PlayerInteraction : MonoBehaviour
         // ESC 키가 눌렸을 때 수행되어야 하는 동작을 여기에 추가합니다.
     }
 }
+//ui가 켜져 있고 버튼을 누리면 그 버튼이 있는 포지션 위치로 이동 이건데.....

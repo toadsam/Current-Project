@@ -33,7 +33,7 @@ public class PlayerInteractionEx : MonoBehaviour
     private Vector3 maxBound;
     private Vector3 originalCameraPosition;
     private RenderTexture renderTexture;
-
+    
     private void Awake()
     {
         InputActions = new PlayerInputActions();
@@ -121,6 +121,7 @@ public class PlayerInteractionEx : MonoBehaviour
             objectCamera.transform.rotation = cameraPosition.rotation;
             originalCameraPosition = objectCamera.transform.position;
             cameraUI.SetActive(true);
+            Player.isMoving = false;
 
             float halfOrthographicSize = cameraObj.orthographicSize / 2f;
 
@@ -201,6 +202,7 @@ public class PlayerInteractionEx : MonoBehaviour
             cameraUI.SetActive(false);
             cameraObj.orthographicSize = 1f;
             focusInteraction = false;
+            Player.isMoving = true; 
             Camera.main.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = false;
             cameraObj.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = false;
         }
