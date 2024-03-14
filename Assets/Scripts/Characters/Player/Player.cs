@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
 
     private PlayerStateMachine stateMachine;
+    
+    public static bool isMoving;
 
     private void Awake()
     {
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour
     {
        // Cursor.lockState = CursorLockMode.Locked;
         stateMachine.ChangeState(stateMachine.IdleState);
+        isMoving = true;
     }
     private void Update()
     {

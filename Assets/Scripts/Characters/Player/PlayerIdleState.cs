@@ -24,7 +24,7 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Update()
     {
         base.Update();
-        if (stateMachine.MovementInput != Vector2.zero)
+        if (stateMachine.MovementInput != Vector2.zero && Player.isMoving)
         {
             OnMove();
             return;
