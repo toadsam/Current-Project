@@ -34,6 +34,7 @@ public class PlayerInteractionEx : MonoBehaviour
     private Vector3 originalCameraPosition;
     private RenderTexture renderTexture;
     
+    public static bool isDetect;
     private void Awake()
     {
         InputActions = new PlayerInputActions();
@@ -44,6 +45,8 @@ public class PlayerInteractionEx : MonoBehaviour
 
         interactionText.GetComponent<Button>().onClick.AddListener(OnInteraction);
         cameraUI.GetComponent<EventTrigger>().AddListener(EventTriggerType.PointerClick, OnClick);
+
+        isDetect = false;
     }
     
     void Update()
@@ -97,18 +100,7 @@ public class PlayerInteractionEx : MonoBehaviour
         Debug.Log("나 누르는 중");
         interactionText.gameObject.SetActive(false);
         StartInteraction();
-        // if (interactionText != null)
-        // {
-        //     // UI 텍스트가 활성화되어 있고, 마우스 왼쪽 버튼이 클릭되면 상호작용 시작
-        //     if (interactionText.gameObject.activeSelf)
-        //     {
-        //         StartInteraction();
-        //     }
-        // }
-        // else
-        // {
-        //     return;
-        // }
+        
     }
 
     private void StartInteraction()
@@ -167,6 +159,7 @@ public class PlayerInteractionEx : MonoBehaviour
     {
         if(!focusInteraction)
         {
+            isDetect = true;
             Camera.main.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = true;
             cameraObj.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = true;
 
@@ -202,7 +195,8 @@ public class PlayerInteractionEx : MonoBehaviour
             cameraUI.SetActive(false);
             cameraObj.orthographicSize = 1f;
             focusInteraction = false;
-            Player.isMoving = true; 
+            Player.isMoving = true;
+            isDetect = false;
             Camera.main.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = false;
             cameraObj.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = false;
         }
