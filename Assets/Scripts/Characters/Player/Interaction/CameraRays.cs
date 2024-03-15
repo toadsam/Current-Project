@@ -23,19 +23,19 @@ public class CameraRays : MonoBehaviour
         if (PlayerInteractionEx.isDetect)
         {
 
-            ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // Ä«¸Þ¶ó ºäÆ÷Æ®ÀÇ Áß½É¿¡¼­ ·¹ÀÌ »ý¼º
-            ratHits = Physics.RaycastAll(ray, MAX_RAY_DISTANCE); // ¸ðµç Ãæµ¹ Á¤º¸¸¦ °¡Á®¿È
+            ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß½É¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            ratHits = Physics.RaycastAll(ray, MAX_RAY_DISTANCE); // ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             bool greenRayDetected = false;
 
             foreach (RaycastHit hit in ratHits)
             {
-                if (hit.collider.CompareTag("FocusObject")) // Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®ÀÇ ÅÂ±×°¡ "add"ÀÎ °æ¿ì¿¡¸¸
+                if (hit.collider.CompareTag("FocusObject")) // ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Â±×°ï¿½ "add"ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½
                 {
                     greenRayDetected = true;
-                    Debug.DrawLine(ray.origin, hit.point, Color.green); // ·¹ÀÌÀÇ Ãæµ¹ ÁöÁ¡±îÁö ÃÊ·Ï»ö ¶óÀÎÀ» ±×·ÁÁÜ (µð¹ö±×¿ë)
-                    // Debug.Log("Ä³¸¯ÅÍ°¡ º¸°í ÀÖ´Â ¿ÀºêÁ§Æ® ÀÌ¸§: " + hit.collider.gameObject.name); // µð¹ö±× ·Î±× Ãâ·Â
+                    Debug.DrawLine(ray.origin, hit.point, Color.green); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê·Ï»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½×¿ï¿½)
+                    // Debug.Log("Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¸ï¿½: " + hit.collider.gameObject.name); // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½
 
-                    break; // Ã¹ ¹øÂ°·Î ¹ß°ßÇÑ "add" ÅÂ±×¸¦ °¡Áø ¿ÀºêÁ§Æ®¸¸ Ã³¸®ÇÏ°í ·çÇÁ Á¾·á
+                    break; // Ã¹ ï¿½ï¿½Â°ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ "add" ï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
                 else
                 {
@@ -47,23 +47,23 @@ public class CameraRays : MonoBehaviour
 
             if (greenRayDetected)
             {
-                greenRayDuration += Time.deltaTime; // ÃÊ·Ï»ö ·¹ÀÌÄ³½ºÆ®ÀÇ Áö¼Ó ½Ã°£ ¾÷µ¥ÀÌÆ®
+                greenRayDuration += Time.deltaTime; // ï¿½Ê·Ï»ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
                 if (greenRayDuration >= GREEN_RAY_THRESHOLD)
                 {
-                    ExecuteFunction(ratHits[0].point); // ÃÊ·Ï»ö ·¹ÀÌÄ³½ºÆ®°¡ ÀÏÁ¤ ½Ã°£ ÀÌ»ó Áö¼ÓµÇ¸é ÇÔ¼ö ½ÇÇà
+                    ExecuteFunction(ratHits[0].point); // ï¿½Ê·Ï»ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ÓµÇ¸ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
             }
             else
             {
-                greenRayDuration = 0.0f; // ÃÊ·Ï»ö ·¹ÀÌÄ³½ºÆ®°¡ °¨ÁöµÇÁö ¾Ê¾ÒÀ¸¹Ç·Î Áö¼Ó ½Ã°£ ÃÊ±âÈ­
+                greenRayDuration = 0.0f; // ï¿½Ê·Ï»ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ê±ï¿½È­
             }
 
             void ExecuteFunction(Vector3 hitPoint)
             {
-                //  Debug.Log("ÃÊ·Ï»ö ·¹ÀÌÄ³½ºÆ®°¡ 2ÃÊ ÀÌ»ó Áö¼ÓµÇ¾ú½À´Ï´Ù!");
-                // Debug.Log("´êÀº ¹°Ã¼ÀÇ À§Ä¡: " + hitPoint);
+                Debug.Log("ï¿½Ê·Ï»ï¿½ ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Æ®ï¿½ï¿½ 2ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ÓµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
+                // Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Ä¡: " + hitPoint);
                 //FocusCamera.transform.position = hitPoint + new Vector3(0, 4, 0);
-                // ¿©±â¿¡ ½ÇÇàÇÒ ÇÔ¼öÀÇ ³»¿ëÀ» Ãß°¡
+                // ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
             }
         }
     }
