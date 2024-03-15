@@ -44,7 +44,7 @@ public class CameraRays : MonoBehaviour
                     
                             ExecuteFunction(ratHits[0].point,hit.collider.gameObject); // 초록색 레이캐스트가 일정 시간 이상 지속되면 함수 실행
                             greenRayDuration = 0.0f; // 초록색 레이캐스트가 감지되지 않았으므로 지속 시간 초기화
-                            Debug.Log(greenRayDuration);
+                          //  Debug.Log(greenRayDuration);
                         
                         }
                     
@@ -84,6 +84,8 @@ public class CameraRays : MonoBehaviour
                     if (gameObject.GetComponent<InteractionObject>().data.isChage == true)
                     {
                         Debug.Log("바뀌었다");
+                        MainManager.Instance.GetScore();
+                        gameObject.GetComponent<InteractionObject>().data.isComplete = true;
                     }
                     else
                     {
