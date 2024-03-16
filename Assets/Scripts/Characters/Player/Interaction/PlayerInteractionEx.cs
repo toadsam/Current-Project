@@ -138,7 +138,7 @@ public class PlayerInteractionEx : MonoBehaviour
         else
             movement = new Vector3(horizontalInput, verticalInput, 0f) * 2f * Time.deltaTime;
 
-        Debug.Log("Movement Vector: " + movement);
+       // Debug.Log("Movement Vector: " + movement);
 
         // 월드 좌표 기준으로 이동
         movement = objectCamera.transform.TransformDirection(movement);
