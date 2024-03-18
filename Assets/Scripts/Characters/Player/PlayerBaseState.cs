@@ -155,24 +155,24 @@ public class PlayerBaseState : IState
         stateMachine.Player.Controller.Move(stateMachine.Player.ForceReceiver.Movement * Time.deltaTime);
     }
 
-    protected virtual void OnAttackPerformed(InputAction.CallbackContext obj)
-    {
-        stateMachine.IsAttacking = true;
-    }
+    //protected virtual void OnAttackPerformed(InputAction.CallbackContext obj)
+    //{
+    //    stateMachine.IsAttacking = true;
+    //}
 
-    protected virtual void OnAttackCanceled(InputAction.CallbackContext obj)
-    {
-        stateMachine.IsAttacking = false;
-    }
+    //protected virtual void OnAttackCanceled(InputAction.CallbackContext obj)
+    //{
+    //    stateMachine.IsAttacking = false;
+    //}
 
-    protected virtual void OnInteractionPerformed(InputAction.CallbackContext obj) 
-    {
-        stateMachine.IsInteraction = true;
-    }
-    protected virtual void OnInteractionCanceled(InputAction.CallbackContext obj)
-    {
-        stateMachine.IsInteraction = false;
-    }
+    //protected virtual void OnInteractionPerformed(InputAction.CallbackContext obj) 
+    //{
+    //    stateMachine.IsInteraction = true;
+    //}
+    //protected virtual void OnInteractionCanceled(InputAction.CallbackContext obj)
+    //{
+    //    stateMachine.IsInteraction = false;
+    //}
 
 
     protected float GetNormalizedTime(Animator animator, string tag)
