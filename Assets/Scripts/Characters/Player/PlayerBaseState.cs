@@ -115,11 +115,7 @@ public class PlayerBaseState : IState
 
         stateMachine.Player.Input.PlayerActions.Jump.started += OnJumpStarted;
 
-        // stateMachine.Player.Input.PlayerActions.Interaction.performed += OnInteractionPerformed;
-        // stateMachine.Player.Input.PlayerActions.Interaction.canceled += OnInteractionPerformed;
-
-        //stateMachine.Player.Input.PlayerActions.Attack.performed += OnAttackPerformed;
-        //stateMachine.Player.Input.PlayerActions.Attack.canceled += OnAttackCanceled;
+      
 
     }
     protected virtual void RemoveInputActionsCallbacks() 
@@ -130,11 +126,7 @@ public class PlayerBaseState : IState
 
         stateMachine.Player.Input.PlayerActions.Jump.started -= OnJumpStarted;
 
-        // stateMachine.Player.Input.PlayerActions.Interaction.performed -= OnInteractionPerformed;
-        // stateMachine.Player.Input.PlayerActions.Interaction.canceled -= OnInteractionPerformed;
-
-        //stateMachine.Player.Input.PlayerActions.Attack.performed -= OnAttackPerformed;
-        //stateMachine.Player.Input.PlayerActions.Attack.canceled -= OnAttackCanceled;
+        
     }
     protected virtual void OnJumpStarted(InputAction.CallbackContext context)
     {
@@ -155,24 +147,24 @@ public class PlayerBaseState : IState
         stateMachine.Player.Controller.Move(stateMachine.Player.ForceReceiver.Movement * Time.deltaTime);
     }
 
-    protected virtual void OnAttackPerformed(InputAction.CallbackContext obj)
-    {
-        stateMachine.IsAttacking = true;
-    }
+    //protected virtual void OnAttackPerformed(InputAction.CallbackContext obj)
+    //{
+    //    stateMachine.IsAttacking = true;
+    //}
 
-    protected virtual void OnAttackCanceled(InputAction.CallbackContext obj)
-    {
-        stateMachine.IsAttacking = false;
-    }
+    //protected virtual void OnAttackCanceled(InputAction.CallbackContext obj)
+    //{
+    //    stateMachine.IsAttacking = false;
+    //}
 
-    protected virtual void OnInteractionPerformed(InputAction.CallbackContext obj) 
-    {
-        stateMachine.IsInteraction = true;
-    }
-    protected virtual void OnInteractionCanceled(InputAction.CallbackContext obj)
-    {
-        stateMachine.IsInteraction = false;
-    }
+    //protected virtual void OnInteractionPerformed(InputAction.CallbackContext obj) 
+    //{
+    //    stateMachine.IsInteraction = true;
+    //}
+    //protected virtual void OnInteractionCanceled(InputAction.CallbackContext obj)
+    //{
+    //    stateMachine.IsInteraction = false;
+    //}
 
 
     protected float GetNormalizedTime(Animator animator, string tag)

@@ -74,8 +74,7 @@ public class PlayerInteractionEx : MonoBehaviour
         {
             if (other.transform.childCount > 0)
             {
-                //이거 지워두 되나?
-                //interactionText = other.transform.GetChild(0);
+                
                 cameraPosition = other.transform.GetChild(0);
                 // 가져온 첫 번째 자식에 대한 작업을 수행
             }
@@ -169,8 +168,6 @@ public class PlayerInteractionEx : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                //이거 지워두 되나?
-                Debug.Log("클릭된 위치의 월드 좌표: " + hit.point);
                 cameraObj.transform.position = hit.point;
 
                 cameraObj.orthographicSize = 0.5f;

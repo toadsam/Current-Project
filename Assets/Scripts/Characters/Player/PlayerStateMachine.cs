@@ -6,17 +6,9 @@ public class PlayerStateMachine : StateMachine
 {
     public Player Player { get; }
 
-
-    public PlayerComboAttackState ComboAttackState { get; }
-
-    public bool IsAttacking { get; set; }
-    public int ComboIndex { get; set; }
-
-
     public bool IsInteraction { get; set; }
 
 
-    public PlayerInteractionBaseState InteractionBaseState { get;}
     public PlayerIdleState IdleState { get; }
     public PlayerWalkState WalkState { get; }
     public PlayerRunState RunState { get; }
@@ -46,7 +38,6 @@ public class PlayerStateMachine : StateMachine
         RunState = new PlayerRunState(this);
         JumpState = new PlayerJumpState(this);
         FallState = new PlayerFallState(this);
-        ComboAttackState = new PlayerComboAttackState(this);
 
         MainCameraTransform = Camera.main.transform;
 
