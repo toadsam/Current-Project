@@ -26,15 +26,15 @@ public class CameraRays : MonoBehaviour
 
             ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // 카메라 뷰포트의 중심에서 레이 생성
             ratHits = Physics.RaycastAll(ray, MAX_RAY_DISTANCE); // 모든 충돌 정보를 가져옴
-            //bool greenRayDetected = false;
+            
 
             foreach (RaycastHit hit in ratHits)
             {
                 if (hit.collider.CompareTag("FocusObject") && (!hit.collider.gameObject.GetComponent<InteractionObject>().data.isComplete)) // 충돌한 오브젝트의 태그가 "add"인 경우에만
                 {
-                  //  greenRayDetected = true;
+                  
                     Debug.DrawLine(ray.origin, hit.point, Color.green); // 레이의 충돌 지점까지 초록색 라인을 그려줌 (디버그용)
-                    // Debug.Log("캐릭터가 보고 있는 오브젝트 이름: " + hit.collider.gameObject.name); // 디버그 로그 출력
+                    
                     
                    
                     
@@ -44,12 +44,12 @@ public class CameraRays : MonoBehaviour
                     
                             ExecuteFunction(ratHits[0].point,hit.collider.gameObject); // 초록색 레이캐스트가 일정 시간 이상 지속되면 함수 실행
                             greenRayDuration = 0.0f; // 초록색 레이캐스트가 감지되지 않았으므로 지속 시간 초기화
-                          //  Debug.Log(greenRayDuration);
+                          ;
                         
                         }
                     
                    
-                      //  greenRayDuration = 0.0f; // 초록색 레이캐스트가 감지되지 않았으므로 지속 시간 초기화
+                      
                     
 
                     break; // 첫 번째로 발견한 "add" 태그를 가진 오브젝트만 처리하고 루프 종료
@@ -62,19 +62,6 @@ public class CameraRays : MonoBehaviour
 
             }
 
-            // if (greenRayDetected)
-            // {
-            //     greenRayDuration += Time.deltaTime; // 초록색 레이캐스트의 지속 시간 업데이트
-            //     if (greenRayDuration >= GREEN_RAY_THRESHOLD)
-            //     {
-            //         
-            //         ExecuteFunction(ratHits[0].point); // 초록색 레이캐스트가 일정 시간 이상 지속되면 함수 실행
-            //     }
-            // }
-            // else
-            // {
-            //     greenRayDuration = 0.0f; // 초록색 레이캐스트가 감지되지 않았으므로 지속 시간 초기화
-            // }
 
             void ExecuteFunction(Vector3 hitPoint, GameObject gameObject)
             {
@@ -95,7 +82,6 @@ public class CameraRays : MonoBehaviour
                 else { Debug.Log("없는 다른 값이다!!!!");
                 }
                 
-                // 여기에 실행할 함수의 내용을 추가
             }
         }
     }

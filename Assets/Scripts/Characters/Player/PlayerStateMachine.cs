@@ -9,7 +9,6 @@ public class PlayerStateMachine : StateMachine
     public bool IsInteraction { get; set; }
 
 
-    public PlayerInteractionBaseState InteractionBaseState { get;}
     public PlayerIdleState IdleState { get; }
     public PlayerWalkState WalkState { get; }
     public PlayerRunState RunState { get; }
