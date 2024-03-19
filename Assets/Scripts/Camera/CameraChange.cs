@@ -5,26 +5,26 @@ using Cinemachine;
 
 public class CameraChange : MonoBehaviour
 { 
-    private int m_CurrentCameraIndex = 0;
+    private int currentCameraIndex = 0;
 
-    public CinemachineVirtualCamera[] m_Cameras;
+    public CinemachineVirtualCamera[] cameras;
 
 	void Update()
     {
-        // Q 키를 누르면 왼쪽 카메라를 활성화
+        //Q 키를 누르면 왼쪽 카메라 활성화
         if (Input.GetKeyDown(KeyCode.Q))
-            SwitchCamera((m_CurrentCameraIndex - 1 + m_Cameras.Length) % m_Cameras.Length);
+            SwitchCamera((currentCameraIndex - 1 + cameras.Length) % cameras.Length);
 
-        // E 키를 누르면 오른쪽 카메라를 활성화
+        //E 키를 누르면 오른쪽 카메라 활성화
         if (Input.GetKeyDown(KeyCode.E))
-            SwitchCamera((m_CurrentCameraIndex + 1) % m_Cameras.Length);
+            SwitchCamera((currentCameraIndex + 1) % cameras.Length);
     }
 
     void SwitchCamera(int newIndex)
     {
-        m_Cameras[m_CurrentCameraIndex].gameObject.SetActive(false);
-        m_Cameras[newIndex].gameObject.SetActive(true);
+        cameras[currentCameraIndex].gameObject.SetActive(false);
+        cameras[newIndex].gameObject.SetActive(true);
 
-        m_CurrentCameraIndex = newIndex;
+        currentCameraIndex = newIndex;
     }
 }

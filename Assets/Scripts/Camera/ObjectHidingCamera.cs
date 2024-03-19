@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ObjectHidingCamera : MonoBehaviour
 {
-    private Transform target = null;
-
     //가려진 물체를 확인하는 데 사용되는 둥근 캐스트의 반지름
     [SerializeField]
     private float sphereCastRadius = 1f;
@@ -17,35 +15,37 @@ public class ObjectHidingCamera : MonoBehaviour
     private List<HideableObject> hiddenObjects = new List<HideableObject>();
     private List<HideableObject> previouslyHiddenObjects = new List<HideableObject>();
 
-    private GameObject tPlayer;
+    private GameObject player;
+    private Transform playerTr;
 
-    //오브젝트 표시유무 작동
+    //물리 연산 후에 작동하기 위해 LateUpdate 사용
     private void LateUpdate()
     {
         RefreshHiddenObjects();
     }
 
+    //숨겨진 오브젝트 갱신
     public void RefreshHiddenObjects()
     {
-        if(tPlayer == null)
+        if(player == null)
         {
-            tPlayer = GameObject.FindWithTag("Player");
-            if(tPlayer != null)
-                target = tPlayer.transform;
+            player = GameObject.FindWithTag("Player");
+            if(player != null)
+                playerTr = player.transform;
         }
 
-        //target 위치에 대한 ray 계산
-        Vector3 toTarget = (target.position - transform.position);
+        //플레이어 위치에서 카메라까지의 방향과 거리 계산
+        Vector3 toTarget = (playerTr.position - transform.position);
         float targetDistance = toTarget.magnitude;
         Vector3 targetDirection = toTarget / targetDistance;
 
-        //실수로 플레이어 뒤의 벽에 부딪히지 않도록 목표물 바로 앞에서 멈추기
+        //플레이어 뒤의 벽에 부딪히지 않도록 거리 조정
         targetDistance -= sphereCastRadius * 1.1f;
 
-        //리스트 추가
+        //이전에 감지된 오브젝트 리스트 초기화
         hiddenObjects.Clear();
 
-        //sphereCastRadius로 플레이어랑 부딪치는 물체가 Trigger를 hit 해야하는지 안해야하는지 알려줌
+        //sphereCastRadius로 주변 오브젝트 감지
         int hitCount = Physics.SphereCastNonAlloc(transform.position,
                                                     sphereCastRadius,
                                                     targetDirection,
@@ -54,32 +54,31 @@ public class ObjectHidingCamera : MonoBehaviour
                                                     -1,
                                                     QueryTriggerInteraction.Ignore);
         
-        //숨길 수 있는 물건 모으기
+        //숨길 수 있는 오브젝트 추가
         for(int i = 0; i < hitCount; i++)
         {
             var hit = hitBuffer[i];
-            var hideable = HideableObject.GetRootHideableCollider(hit.collider);
+            var hideableObj = HideableObject.GetRootHideableCollider(hit.collider);
 
-            if(hideable != null)
-                hiddenObjects.Add(hideable);
+            if(hideableObj != null)
+                hiddenObjects.Add(hideableObj);
         }
 
-        //오브젝트가 이미 등록되어 있는지 확인 후 숨겨야 하는 것과 보여줘야 하는 것을 넣어줌
-        //숨김
-        foreach(var hideable in hiddenObjects)
+        //이전에 숨겨진 오브젝트와 비교하여 숨겨야 할 오브젝트 숨기기
+        foreach(var hideableObj in hiddenObjects)
         {
-            if(!previouslyHiddenObjects.Contains(hideable))
-                hideable.SetVisible(false);
+            if(!previouslyHiddenObjects.Contains(hideableObj))
+                hideableObj.SetVisible(false);
         }
 
-        //표시
-        foreach(var hideable in previouslyHiddenObjects)
+        //숨겨진 오브젝트 중 보여야 할 오브젝트 표시
+        foreach(var hideableObj in previouslyHiddenObjects)
         {
-            if(!hiddenObjects.Contains(hideable))
-                hideable.SetVisible(true);
+            if(!hiddenObjects.Contains(hideableObj))
+                hideableObj.SetVisible(true);
         }
 
-        //스왑 목록
+        // //숨겨진 오브젝트 리스트와 이전에 숨겨진 오브젝트 리스트 교환
         var temp = hiddenObjects;
         hiddenObjects = previouslyHiddenObjects;
         previouslyHiddenObjects = temp;

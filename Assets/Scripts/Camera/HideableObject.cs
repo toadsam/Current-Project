@@ -9,8 +9,7 @@ public class HideableObject : MonoBehaviour
     private static Dictionary<Collider, HideableObject> hideableObjectsMap = new Dictionary<Collider, HideableObject>();
 
     [SerializeField]
-    public GameObject Renderers;
-    public Collider Collider = null;
+    private Collider Collider = null;
 
     private void Start()
     {
@@ -39,8 +38,7 @@ public class HideableObject : MonoBehaviour
         }
     }
 
-    //지정해준 콜라이더를 확인한 후 오브젝트가 있다면 카메라쪽으로 오브젝트를 넣어줌
-    //콜라이더 확인
+    //매개변수로 전달된 콜라이더에 대한 HideableObject 반환
     public static HideableObject GetRootHideableCollider(Collider collider)
     {
         HideableObject obj;
@@ -51,7 +49,7 @@ public class HideableObject : MonoBehaviour
             return null;
     }
 
-    //확인할 오브젝트
+    //오브젝트의 루트 오브젝트 반환(계층구조 고려하여)
     private static HideableObject GetRoot(HideableObject obj)
     {
         if(obj.hideObject == null)
@@ -60,10 +58,10 @@ public class HideableObject : MonoBehaviour
             return GetRoot(obj.hideObject);
     }
 
-    //카메라에서 오브젝트를 보이게할지 숨길지
+    //오브젝트 렌더링 유무
     public void SetVisible(bool visible)
     {
-        Renderer rend = Renderers.GetComponent<Renderer>();
+        Renderer rend = this.GetComponent<Renderer>();
 
         if(rend != null && rend.gameObject.activeInHierarchy && hideableObjectsMap.ContainsKey(rend.GetComponent<Collider>()))
             rend.shadowCastingMode = visible ? ShadowCastingMode.On : ShadowCastingMode.ShadowsOnly;
