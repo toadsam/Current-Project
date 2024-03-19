@@ -24,7 +24,6 @@ public class PlayerInteractionEx : MonoBehaviour
     [SerializeField] private GameObject objectCamera;
     [SerializeField] private GameObject cameraUI;
     private Transform cameraPosition;
-
     private Camera cameraObj;
 
     //focus 상호작용 관련 변수
@@ -35,6 +34,7 @@ public class PlayerInteractionEx : MonoBehaviour
     private RenderTexture renderTexture;
     
     public static bool isDetect;
+
     private void Awake()
     {
         InputActions = new PlayerInputActions();
@@ -74,6 +74,7 @@ public class PlayerInteractionEx : MonoBehaviour
         {
             if (other.transform.childCount > 0)
             {
+                //이거 지워두 되나?
                 //interactionText = other.transform.GetChild(0);
                 cameraPosition = other.transform.GetChild(0);
                 // 가져온 첫 번째 자식에 대한 작업을 수행
@@ -100,13 +101,10 @@ public class PlayerInteractionEx : MonoBehaviour
         Debug.Log("나 누르는 중");
         interactionText.gameObject.SetActive(false);
         StartInteraction();
-        
     }
 
     private void StartInteraction()
     {
-        // 상호작용 동작 실행
-        Debug.Log("상호작용 시작!");
         if(cameraPosition != null)
         {
             objectCamera.transform.position = cameraPosition.position;
@@ -116,7 +114,6 @@ public class PlayerInteractionEx : MonoBehaviour
             Player.isMoving = false;
 
             float halfOrthographicSize = cameraObj.orthographicSize / 2f;
-
             minBound = new Vector3(originalCameraPosition.x - halfOrthographicSize, originalCameraPosition.y - halfOrthographicSize, originalCameraPosition.z - halfOrthographicSize);
             maxBound = new Vector3(originalCameraPosition.x + halfOrthographicSize, originalCameraPosition.y + halfOrthographicSize, originalCameraPosition.z + halfOrthographicSize);
         }
@@ -138,8 +135,6 @@ public class PlayerInteractionEx : MonoBehaviour
         else
             movement = new Vector3(horizontalInput, verticalInput, 0f) * 2f * Time.deltaTime;
 
-       // Debug.Log("Movement Vector: " + movement);
-
         // 월드 좌표 기준으로 이동
         movement = objectCamera.transform.TransformDirection(movement);
 
@@ -155,6 +150,7 @@ public class PlayerInteractionEx : MonoBehaviour
         objectCamera.transform.position = newPosition;
     }
 
+    //Focus 상호작용 함수
     private void OnClick(PointerEventData eventData)
     {
         if(!focusInteraction)
@@ -173,6 +169,7 @@ public class PlayerInteractionEx : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
+                //이거 지워두 되나?
                 Debug.Log("클릭된 위치의 월드 좌표: " + hit.point);
                 cameraObj.transform.position = hit.point;
 
