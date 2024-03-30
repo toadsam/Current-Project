@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,27 +17,31 @@ public class ScaryEffect : MonoBehaviour
    public UnityEvent onUpdate;
    public UnityEvent onComplete;
 
+   private void Start()
+   {
+    // targetSource = this.GetComponent<ScaryEvent>();
+   }
+
    public void StartEffect()
-    {
-        // //delay 후에 Effect 시작
-        // DOVirtual.DelayedCall(delay, PlayEffect);
-    }
+   {
+       onStart.Invoke();
+       Debug.Log("배현아 정재훈 파이팅!");
+       //onStart.Invoke();
+       onComplete.Invoke();
+   }
+   public void RotatingLightBeamWithScaling()
+   {
+       Debug.Log("배현아 정재훈 힘내자!");
+   }
 
-//     private void PlayEffect()
-//     {
-//         //Effect가 시작될 때 실행되는 이벤트 호출
-//         onStart.Invoke();
+     private void PlayEffect()
+     {
+         //Effect가 시작될 때 실행되는 이벤트 호출
+         onStart.Invoke();
+         onPlay.Invoke();
+         onUpdate.Invoke();
+         onComplete.Invoke();
 
-//         //Effect 실행
-//         transform.DOMove(Vector3.zero, duration).SetEase(ease).SetLoops(loop).OnPlay(() =>
-//         {
-//             onPlay.Invoke();
-//         }).OnUpdate(() =>
-//         {
-//             onUpdate.Invoke();
-//         }).OnComplete(() =>
-//         {
-//             onComplete.Invoke();
-//         });
-//     }
+        
+     }
 }
