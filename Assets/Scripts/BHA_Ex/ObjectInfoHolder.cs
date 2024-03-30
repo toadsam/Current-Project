@@ -9,12 +9,12 @@ public class ObjectInfoHolder : MonoBehaviour
     public List<AudioSource> audioTargets = new List<AudioSource>();
     public enum scaryEventTier {Low, Medium, High};
 
-    void Start()
-    {
-        for(int i = 0; i < this.transform.childCount; i++){
-            transformTargets.Add(this.transform.GetChild(i).transform);
-            lightTargets.Add(this.transform.GetChild(i).GetChild(0).GetComponent<Light>());
-            audioTargets.Add(this.transform.GetChild(i).GetChild(1).GetComponent<AudioSource>());
-        }
-    }
+    // void Start()
+    // {
+    //     for(int i = 0; i < this.transform.childCount; i++){
+    //         transformTargets.Add(this.transform.GetChild(i).transform);
+    //         lightTargets.Add(this.transform.GetChild(i).GetChild(0).GetComponent<Light>());
+    //         audioTargets.Add(this.transform.GetChild(i).GetChild(1).GetComponent<AudioSource>());
+    //     }
+    // }ばばばばばぱ
 }

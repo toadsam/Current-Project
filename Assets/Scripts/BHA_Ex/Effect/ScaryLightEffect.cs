@@ -19,6 +19,10 @@ public class ScaryLightEffect : ScaryEffect
     {
         this.GetComponent<Light>().intensity = 10;
     }
+    public void StartEffect()
+    {
+        Debug.Log("배현아 정재훈 파이팅!");
+    }
 
 
     // // ScaryEffect의 StartEffect 메서드를 오버라이드
