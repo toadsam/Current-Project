@@ -24,24 +24,9 @@ public class ScaryEffect : MonoBehaviour
 
    public void StartEffect()
    {
-       onStart.Invoke();
-       Debug.Log("배현아 정재훈 파이팅!");
-       //onStart.Invoke();
-       onComplete.Invoke();
+        onStart.Invoke();
+        onPlay.Invoke();
+        onUpdate.Invoke();
+        onComplete.Invoke();
    }
-   public void RotatingLightBeamWithScaling()
-   {
-       Debug.Log("배현아 정재훈 힘내자!");
-   }
-
-     private void PlayEffect()
-     {
-         //Effect가 시작될 때 실행되는 이벤트 호출
-         onStart.Invoke();
-         onPlay.Invoke();
-         onUpdate.Invoke();
-         onComplete.Invoke();
-
-        
-     }
 }

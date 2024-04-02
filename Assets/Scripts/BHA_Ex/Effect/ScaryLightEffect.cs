@@ -19,37 +19,4 @@ public class ScaryLightEffect : ScaryEffect
     {
         this.GetComponent<Light>().intensity = 10;
     }
-    public void StartEffect()
-    {
-        Debug.Log("배현아 정재훈 파이팅!");
-    }
-
-
-    // // ScaryEffect의 StartEffect 메서드를 오버라이드
-    // public override void StartEffect()
-    // {
-    //     // delay 후에 Effect 시작
-    //     DOVirtual.DelayedCall(delay, PlayEffect);
-    // }
-
-    // // Effect 실행 메서드
-    // private void PlayEffect()
-    // {
-    //     onStart.Invoke();
-        
-    //     DOTween.Sequence()
-    //         .Append(targetLight.DOColor(targetColor, duration).SetEase(ease))
-    //         .Join(targetLight.DOIntensity(targetIntensity, duration).SetEase(ease))
-    //         .Join(targetLight.DOShadowStrength(targetIndirectMultiplier, duration).SetEase(ease))
-    //         // .Join(targetLight.DOShadowType(targetShadowType, duration).SetEase(ease))
-    //         // .Join(targetLight.DOShadowBias(targetDrawHalo ? 1f : 0f, duration).SetEase(ease))
-    //         .OnUpdate(() =>
-    //         {
-    //             onUpdate.Invoke();
-    //         })
-    //         .OnComplete(() =>
-    //         {
-    //             onComplete.Invoke();
-    //         });
-    // }
 }

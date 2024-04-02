@@ -18,38 +18,16 @@ public class ScaryEvent : MonoBehaviour
         currentIndexForTargets.Add("light", 0);
         currentIndexForTargets.Add("audio", 0);
         currentIndexForTargets.Add("transform", 0);
-        StartEvent();
-    }
-    
-    
 
+        for(int i = 0; i < transform.childCount; i++)
+            scaryEffects[i] = transform.GetChild(i).GetComponent<ScaryEffect>();
+    }
 
     public void StartEvent()
     {
         scaryEffects[0].StartEffect();
-      //  scaryEffects[0].RotatingLightBeamWithScaling();
-        
     }
 
-    // public T GetCurrentTarget<T>(string key)
-    // {
-    //     int currentIndex = currentIndexForTargets[key];
-    //     currentIndexForTargets[key] += 1;
-    //
-    //     return (T)(object)currentEventTarget.lightTargets[currentIndexForTargets[key]];
-    // }
-
-    // //제네릭 함수
-    // public T GetCurrentTarget<T>(string key)
-    // {
-    //     //현재 대상의 인덱스 가져오기
-    //     int currentIndex = currentIndexForTargets[key];
-
-    //     //key
-
-    //     //현재 대상의 리스트에서 해당 인덱스의 대상 반환
-    //     return (T)(currentEventTarget.lightTargets[currentIndex]);
-    // }
     public T GetCurrentTarget<T>(string targetType) where T : UnityEngine.Object {
         int index = currentIndexForTargets.ContainsKey(targetType) ? currentIndexForTargets[targetType] : 0;
         var targetList = currentEventTarget.GetType().GetField(targetType + "Targets").GetValue(currentEventTarget) as List<T>;
