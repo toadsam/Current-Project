@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+//public enum scaryEventTier { Low, Medium, High };
 
 public class ScaryEvent : MonoBehaviour
 {
     public List<ScaryEffect> scaryEffects;
    // public List<ScaryEffect> startEffects;
-    public enum scaryEventTier {Low, Medium, High};
+   public scaryEventTier scaryEventTier;
+    public scaryEventWhen scaryEventWhen;
+    
     public ObjectInfoHolder currentEventTarget;
     private Dictionary <string, int> currentIndexForTargets = new Dictionary<string, int>();
     

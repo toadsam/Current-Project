@@ -5,22 +5,32 @@ using UnityEngine;
 
 public class ObjectEventHandler : MonoBehaviour
 {
-    public ScaryEvent scaryEvent;
+    public List<ScaryEvent> scaryEvents;
 
     private void Start()
     {
+        scaryEvents = new List<ScaryEvent>();
+        Debug.Log(transform.childCount);
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            scaryEvents.Add(transform.GetChild(i).GetComponent<ScaryEvent>());
+        }
         //처음 이벤트 시작
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            scaryEvent.StartEvent();
+    public void Match(ObjectInfoHolder objectInfoHolder,scaryEventWhen eventWhen) 
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (objectInfoHolder.ObjectTier == scaryEvents[i].scaryEventTier && eventWhen  == scaryEvents[i].scaryEventWhen)
+            {
+                 scaryEvents[i].currentEventTarget = objectInfoHolder;
+            }
         }
+        
+        
+
     }
 
-    private void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Player")) {
-            //scaryEvent.StopEvent();
-        }
-    }
+    
 }

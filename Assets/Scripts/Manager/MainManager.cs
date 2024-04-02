@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum scaryEventTier { Low, Medium, High };
+public enum scaryEventWhen { OnAwake, OnProximity, OnViewInteractionStart, OnFocusInteractionStart, OnSustainedFocusInteraction };
 public class MainManager : MonoBehaviour
 {
+
+    public scaryEventWhen PlayerEventWhen;
     public static MainManager Instance { get; private set; }
 
     public AudioManager audioManager;
