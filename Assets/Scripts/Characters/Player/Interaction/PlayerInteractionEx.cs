@@ -83,6 +83,7 @@ public class PlayerInteractionEx : MonoBehaviour
                 Debug.Log("없습니다");
                 return;
             }
+            MainManager.Instance.objectEventHandler.Match(other.GetComponent<ObjectInfoHolder>(), scaryEventWhen.OnProximity);
             // UI 텍스트를 활성화하여 상호작용 가능 문구를 표시
             interactionText.gameObject.SetActive(true);
         }
