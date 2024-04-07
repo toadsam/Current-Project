@@ -10,9 +10,10 @@ public class MainManager : MonoBehaviour
     public scaryEventWhen PlayerEventWhen;
     public static MainManager Instance { get; private set; }
 
-    public AudioManager audioManager;
-    public UIManager uiManager;
-    public GameManager gameManager;
+  //  public AudioManager audioManager;
+    //public UIManager uiManager;
+    //public GameManager gameManager;
+    public ObjectEventHandler objectEventHandler;
 
     private void Awake()
     {
@@ -30,16 +31,16 @@ public class MainManager : MonoBehaviour
 
     public void PlaySound(string soundName)
     {
-        audioManager.PlaySound(soundName);
+        //audioManager.PlaySound(soundName);
     }
 
     public void UpdateScore(int score)
     {
-        uiManager.UpdateScore(score);
+        //uiManager.UpdateScore(score);
     }
 
     public void GetScore()
     {
-        gameManager.GetSocore();
+        //gameManager.GetSocore();
     }
 }

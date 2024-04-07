@@ -59,7 +59,7 @@ public class DOTweenManager : MonoBehaviour
         LightColorChangeOnMove(testObject2, testRight2,(Vector3.back), 2f );
         LightFlickerEffectOnRotation(testObject3, testRight3, (Vector3.back), 2f);
         ColorfulPulseWithLightIntensityAndScale(testObject4, testRight4);
-        RotatingLightBeamWithScaling(testObject5, testRight5);
+       // RotatingLightBeamWithScaling(testObject5, testRight5);
         LightFlickerAndGameObjectFade(testObject6, testRight6);
         ComplexAnimationWithRandomMovement(testObject7, testRight7);
 
@@ -246,22 +246,22 @@ public class DOTweenManager : MonoBehaviour
     }
     
     //GameObject가 회전하면서 크기가 점차 증가하고, 관련된 Light가 빔처럼 방향을 바꾸면서 지속적으로 색상이 변하는 효과입니다.
-    public void RotatingLightBeamWithScaling(GameObject target, Light lightSource)
+    public void RotatingLightBeamWithScaling(Transform target)
     {
         // GameObject 회전 효과
-        target.transform.DORotate(new Vector3(0, 0, 360), 5f, RotateMode.FastBeyond360)
+        target.DORotate(new Vector3(0, 0, 360), 5f, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear)
             .SetLoops(-1, LoopType.Restart);
 
         // GameObject 크기 증가 효과
-        target.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 5f)
+        target.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 5f)
             .SetEase(Ease.InOutQuad)
             .SetLoops(-1, LoopType.Yoyo);
 
         // Light 색상 변화 효과
-        DOTween.To(() => lightSource.color, x => lightSource.color = x, new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value), 3f)
-            .SetEase(Ease.Linear)
-            .SetLoops(-1, LoopType.Restart);
+        //DOTween.To(() => lightSource.color, x => lightSource.color = x, new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value), 3f)
+        //    .SetEase(Ease.Linear)
+        //    .SetLoops(-1, LoopType.Restart);
     }
     
     //GameObject가 페이드 인-아웃 하는 동안 관련된 Light가 깜박이는 효과를 생성합니다. 이 메서드는 음산한 분위기를 연출하거나 주의를 끌고자 할 때 유용합니다.

@@ -28,8 +28,12 @@ public class ScaryEvent : MonoBehaviour
 
     public void StartEvent()
     {
-        scaryEffects[0].StartEffect();
+        for (int i = 0; i < scaryEffects.Count; i++)
+        {
+            scaryEffects[i].StartEffect();
+        }
     }
+    
 
     public T GetCurrentTarget<T>(string targetType) where T : UnityEngine.Object {
         int index = currentIndexForTargets.ContainsKey(targetType) ? currentIndexForTargets[targetType] : 0;
