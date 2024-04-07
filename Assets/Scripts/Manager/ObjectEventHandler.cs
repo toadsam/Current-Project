@@ -28,6 +28,7 @@ public class ObjectEventHandler : MonoBehaviour
                 scaryEvents[i].currentEventTarget = objectInfoHolder;
                 Debug.Log(objectInfoHolder.name);
                 scaryEvents[i].StartEvent();
+                //break;
                 //scaryEvents.Add(scaryEvents[i]);
                 //scaryEvents.RemoveAt(i);
                 //scaryEvents.Add()

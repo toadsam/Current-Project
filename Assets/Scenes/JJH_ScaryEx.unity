@@ -2696,6 +2696,157 @@ Transform:
   m_Father: {fileID: 939566857}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &975122024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 975122025}
+  - component: {fileID: 975122028}
+  - component: {fileID: 975122027}
+  - component: {fileID: 975122026}
+  m_Layer: 0
+  m_Name: Effects (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &975122025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975122024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2070155988}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &975122026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975122024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc0f28ec5fe54f4ea719d40552051e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSource: {fileID: 0}
+  duration: 0
+  delay: 0
+  ease: 0
+  loop: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &975122027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975122024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5dcabacfc7d445581c1b522786e947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSource: {fileID: 0}
+  duration: 0
+  delay: 0
+  ease: 0
+  loop: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  targetLight: {fileID: 0}
+  targetColor: {r: 0, g: 0, b: 0, a: 0}
+  targetIntensity: 0
+  targetIndirectMultiplier: 0
+  targetShadowType: 0
+  targetDrawHalo: 0
+--- !u!114 &975122028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975122024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e6ffbc5a80c4c2cb23b1305967513e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetSource: {fileID: 2070155987}
+  duration: 0
+  delay: 0
+  ease: 0
+  loop: 0
+  onStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 975122028}
+        m_TargetAssemblyTypeName: ScaryDoTweenEffect, Assembly-CSharp
+        m_MethodName: Rotating
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 975122028}
+        m_TargetAssemblyTypeName: ScaryDoTweenEffect, Assembly-CSharp
+        m_MethodName: Scaling
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1010613830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2885,7 +3036,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -3683,6 +3834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1378768784}
+  - component: {fileID: 1378768785}
   m_Layer: 0
   m_Name: ScaryEvents
   m_TagString: Untagged
@@ -3710,6 +3862,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1378768785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378768783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cede9624d1873e498114c83dffc2872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaryEvents: []
 --- !u!1 &1413448576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4291,7 +4456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerEventWhen: 0
-  objectEventHandler: {fileID: 1957418387}
+  objectEventHandler: {fileID: 1378768785}
 --- !u!4 &1621277913
 Transform:
   m_ObjectHideFlags: 0
@@ -5937,7 +6102,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1957418388}
-  - component: {fileID: 1957418387}
   m_Layer: 0
   m_Name: ObjectInfoHolders
   m_TagString: Untagged
@@ -5945,19 +6109,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1957418387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957418386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cede9624d1873e498114c83dffc2872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scaryEvents: []
 --- !u!4 &1957418388
 Transform:
   m_ObjectHideFlags: 0
@@ -6447,8 +6598,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaryEffects:
   - {fileID: 544239805}
+  - {fileID: 975122028}
   scaryEventTier: 0
-  scaryEventWhen: 0
+  scaryEventWhen: 1
   currentEventTarget: {fileID: 0}
 --- !u!4 &2070155988
 Transform:
@@ -6463,6 +6615,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 544239808}
+  - {fileID: 975122025}
   m_Father: {fileID: 1378768784}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

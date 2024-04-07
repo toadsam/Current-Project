@@ -19,7 +19,6 @@ public class ScaryEffect : MonoBehaviour
 
    private void Start()
    {
-    // targetSource = this.GetComponent<ScaryEvent>();
    }
 
    public void StartEffect()

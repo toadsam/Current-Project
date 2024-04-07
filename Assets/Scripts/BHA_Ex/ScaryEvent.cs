@@ -8,7 +8,6 @@ using UnityEngine.Events;
 public class ScaryEvent : MonoBehaviour
 {
     public List<ScaryEffect> scaryEffects;
-   // public List<ScaryEffect> startEffects;
    public scaryEventTier scaryEventTier;
     public scaryEventWhen scaryEventWhen;
     

@@ -4,17 +4,6 @@ using UnityEngine;
 using DG.Tweening;
 public class ScaryDoTweenEffect : ScaryEffect
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     
     public void RotatingLightBeamWithScaling()
@@ -42,8 +31,6 @@ public class ScaryDoTweenEffect : ScaryEffect
             .SetEase(Ease.InOutQuad)
             .SetLoops(-1, LoopType.Yoyo)
             .SetDelay(0.5f); // 깜박임 시작 전 약간의 지연을 추가
-         
-        //a.color = Color.blue;
     }
 
     public void Rotating()
@@ -60,13 +47,9 @@ public class ScaryDoTweenEffect : ScaryEffect
     public void Scaling()
     {
         var a = targetSource.GetCurrentTarget<Transform>("transform");
-
-
         // GameObject 크기 증가 효과
         a.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 5f)
             .SetEase(Ease.InOutQuad)
             .SetLoops(-1, LoopType.Yoyo);
-
-
     }
 }
