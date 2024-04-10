@@ -13,17 +13,18 @@ public class ScaryEvent : MonoBehaviour
     
     public ObjectInfoHolder currentEventTarget;
     private Dictionary <string, int> currentIndexForTargets = new Dictionary<string, int>();
-    
 
-    private void Start()
+    private void Awake()
     {
         currentIndexForTargets.Add("light", 0);
         currentIndexForTargets.Add("audio", 0);
         currentIndexForTargets.Add("transform", 0);
 
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
             scaryEffects[i] = transform.GetChild(i).GetComponent<ScaryEffect>();
+
     }
+   
 
     public void StartEvent()
     {
