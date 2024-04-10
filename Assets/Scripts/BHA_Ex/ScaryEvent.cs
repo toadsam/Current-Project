@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-//public enum scaryEventTier { Low, Medium, High };
 
 public class ScaryEvent : MonoBehaviour
 {
     public List<ScaryEffect> scaryEffects;
-   public scaryEventTier scaryEventTier;
+    public scaryEventTier scaryEventTier;
     public scaryEventWhen scaryEventWhen;
     
     public ObjectInfoHolder currentEventTarget;
@@ -19,10 +18,6 @@ public class ScaryEvent : MonoBehaviour
         currentIndexForTargets.Add("light", 0);
         currentIndexForTargets.Add("audio", 0);
         currentIndexForTargets.Add("transform", 0);
-
-        for (int i = 0; i < transform.childCount; i++)
-            scaryEffects[i] = transform.GetChild(i).GetComponent<ScaryEffect>();
-
     }
    
 
