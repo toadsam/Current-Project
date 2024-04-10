@@ -17,16 +17,9 @@ public class ObjectEventHandler : MonoBehaviour
             Debug.Log("없음");
         else
         {             
-            for (int i = 0; i <startTargets.Length; i++)
-            {
-                              
+            for (int i = 0; i <startTargets.Length; i++)              
                 Match(startTargets[i], scaryEventWhen.OnAwake);
-
-            }
-            
         }
-        
-        
     }
    
 
@@ -36,7 +29,6 @@ public class ObjectEventHandler : MonoBehaviour
         {
             if (objectInfoHolder.ObjectTier == scaryEvents[i].scaryEventTier && eventWhen  == scaryEvents[i].scaryEventWhen)
             {
-                Debug.Log("�� ������");
                 scaryEvents[i].currentEventTarget = objectInfoHolder;
                 scaryEvents[i].ResetIndexForTargets();
                 Debug.Log(objectInfoHolder.name);
