@@ -28,9 +28,7 @@ public class ScaryEvent : MonoBehaviour
     public void StartEvent()
     {
         for (int i = 0; i < scaryEffects.Count; i++)
-        {
             scaryEffects[i].StartEffect();
-        }
     }
     
 
@@ -39,5 +37,12 @@ public class ScaryEvent : MonoBehaviour
         var targetList = currentEventTarget.GetType().GetField(targetType + "Targets").GetValue(currentEventTarget) as List<T>;
         currentIndexForTargets[targetType] +=1;
         return targetList != null && index < targetList.Count ? targetList[index] : null;
+    }
+
+    public void ResetIndexForTargets()
+    {
+        var keys = new List<string>(currentIndexForTargets.Keys);
+        foreach (var key in keys)
+            currentIndexForTargets[key] = 0;
     }
 }
