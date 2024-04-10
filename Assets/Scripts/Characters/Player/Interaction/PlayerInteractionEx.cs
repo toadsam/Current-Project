@@ -32,11 +32,13 @@ public class PlayerInteractionEx : MonoBehaviour
     private Vector3 maxBound;
     private Vector3 originalCameraPosition;
     private RenderTexture renderTexture;
+   // private ObjectInfoHolder targrt;
     
     public static bool isDetect;
 
     private void Awake()
     {
+       // MainManager.Instance.objectEventHandler.targrt = null;     
         InputActions = new PlayerInputActions();
         InputActions.Player.Exit.performed += ctx => OnEscapePressed();
 
@@ -83,7 +85,8 @@ public class PlayerInteractionEx : MonoBehaviour
                 Debug.Log("없습니다");
                 return;
             }
-            MainManager.Instance.objectEventHandler.Match(other.GetComponent<ObjectInfoHolder>(), scaryEventWhen.OnProximity);
+            MainManager.Instance.objectEventHandler.targrt = other.GetComponent<ObjectInfoHolder>();
+            MainManager.Instance.objectEventHandler.Match(MainManager.Instance.objectEventHandler.targrt, scaryEventWhen.OnProximity);
             // UI 텍스트를 활성화하여 상호작용 가능 문구를 표시
             interactionText.gameObject.SetActive(true);
         }
@@ -92,6 +95,7 @@ public class PlayerInteractionEx : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // 물체와의 충돌이 종료될 때 UI 텍스트 비활성화
+        MainManager.Instance.objectEventHandler.targrt = null;
         interactionText.gameObject.SetActive(false);
     }
 
@@ -107,6 +111,7 @@ public class PlayerInteractionEx : MonoBehaviour
     {
         if(cameraPosition != null)
         {
+            MainManager.Instance.objectEventHandler.Match(MainManager.Instance.objectEventHandler.targrt, scaryEventWhen.OnViewInteractionStart);
             objectCamera.transform.position = cameraPosition.position;
             objectCamera.transform.rotation = cameraPosition.rotation;
             originalCameraPosition = objectCamera.transform.position;
@@ -156,6 +161,7 @@ public class PlayerInteractionEx : MonoBehaviour
         if(!focusInteraction)
         {
             isDetect = true;
+            MainManager.Instance.objectEventHandler.Match(MainManager.Instance.objectEventHandler.targrt, scaryEventWhen.OnFocusInteractionStart);
             Camera.main.GetComponent<Camera>().GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().renderPostProcessing = true;
             
             Vector2 screenPoint = eventData.position;

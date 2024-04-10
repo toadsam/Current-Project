@@ -66,6 +66,8 @@ public class CameraRays : MonoBehaviour
             void ExecuteFunction(Vector3 hitPoint, GameObject gameObject)
             {
                   Debug.Log("초록색 레이캐스트가 2초 이상 지속되었습니다!");
+                MainManager.Instance.objectEventHandler.Match(MainManager.Instance.objectEventHandler.targrt, scaryEventWhen.OnSustainedFocusInteraction);
+
                 if (gameObject.GetComponent<InteractionObject>() != null)
                 {
                     if (gameObject.GetComponent<InteractionObject>().data.isChage == true)
