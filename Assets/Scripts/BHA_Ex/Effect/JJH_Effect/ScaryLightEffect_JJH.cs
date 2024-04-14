@@ -51,19 +51,21 @@ public class ScaryLightEffect_JJH : MonoBehaviour
 
     public void Flicker()
     {
-        Debug.Log("±ôºý±ôºý");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
     }
 
     public void ColorChange()
     {
-        Debug.Log("»ö ¹Ù²Ù±â");
+        Debug.Log("ï¿½ï¿½ ï¿½Ù²Ù±ï¿½");
     }
 
     public void IntensityChange()
     {
-        Debug.Log("»ö °­µµ ¹Ù²Ù±â");
+        Debug.Log("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù±ï¿½");
         
-        Debug.Log("¹èÇö¾Æ¹èÇö¾Æ¹èÇô³ª¹èÇö³ª");
+        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½Æ¹ï¿½ï¿½ï¿½ï¿½Æ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+
+        Debuh.Log("ì•ˆë…•í•˜ì„¸ìš”~");
     }
     
 }
