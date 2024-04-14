@@ -62,6 +62,8 @@ public class ScaryLightEffect_JJH : MonoBehaviour
     public void IntensityChange()
     {
         Debug.Log("색 강도 바꾸기");
+        
+        Debug.Log("배현아배현아배혀나배현나");
     }
     
 }
