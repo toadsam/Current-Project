@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 public class DoTweenEffect : ScaryEffect
 {
-    
+    public Transform objectPivot;
     
     public void RotatingLightBeamWithScaling()
     {
@@ -58,6 +58,6 @@ public class DoTweenEffect : ScaryEffect
         .Insert(1, objectPivot.DOLocalRotate(new Vector3(0, 0, 0), 1.5f).SetEase(Ease.OutQuad));
     }
 
-    
+
 
 }
