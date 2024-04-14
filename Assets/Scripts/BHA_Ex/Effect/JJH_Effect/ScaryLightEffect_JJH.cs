@@ -65,7 +65,7 @@ public class ScaryLightEffect_JJH : MonoBehaviour
         
         Debug.Log("�����ƹ����ƹ�����������");
 
-        Debuh.Log("안녕하세요~");
+        Debug.Log("안녕하세요~ 안녕하세요~~~~~ 인사해요");
     }
     
 }
