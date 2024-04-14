@@ -1006,9 +1006,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 381792778}
-  - component: {fileID: 381792781}
   - component: {fileID: 381792780}
   - component: {fileID: 381792779}
+  - component: {fileID: 381792781}
   m_Layer: 0
   m_Name: Effects
   m_TagString: Untagged
@@ -1048,6 +1048,7 @@ MonoBehaviour:
   targetRotation: {x: 3, y: 3, z: 3}
   targetScale: {x: 4, y: 4, z: 4}
   duration: 1
+  targetSource: {fileID: 0}
 --- !u!114 &381792780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,32 +1087,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 381792777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5dcabacfc7d445581c1b522786e947, type: 3}
+  m_Script: {fileID: 11500000, guid: 95b7b956c40ef9747b5f0f783a53aad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSource: {fileID: 0}
-  duration: 0
-  delay: 0
-  ease: 0
-  loop: 0
-  onStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onPlay:
-    m_PersistentCalls:
-      m_Calls: []
-  onUpdate:
-    m_PersistentCalls:
-      m_Calls: []
-  onComplete:
-    m_PersistentCalls:
-      m_Calls: []
-  targetLight: {fileID: 0}
+  lightComponent: {fileID: 0}
+  effectType: 2
   targetColor: {r: 0, g: 0, b: 0, a: 0}
   targetIntensity: 0
-  targetIndirectMultiplier: 0
-  targetShadowType: 0
-  targetDrawHalo: 0
+  flickerDuration: 0
+  duration: 0
 --- !u!1 &384896760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,13 +2541,25 @@ MonoBehaviour:
   onStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
+      - m_Target: {fileID: 381792781}
+        m_TargetAssemblyTypeName: ScaryLightEffect_JJH, Assembly-CSharp
+        m_MethodName: Flicker
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 381792779}
+        m_TargetAssemblyTypeName: ScaryDoTweenEffect_JJH, Assembly-CSharp
+        m_MethodName: Scale
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
