@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEditor;
-using UnityEngine;
 
-[CustomEditor(typeof(ScaryEvent_JJH))]
-public class ScaryEventEditor_JJH : Editor
+[CustomEditor(typeof(ScaryEvent))]
+public class ScaryEventEditor : Editor
 {
     private bool showOnStartEvents = false;
     private bool showOnPlayEvents = false;
@@ -14,43 +13,33 @@ public class ScaryEventEditor_JJH : Editor
     private bool showOnCompleteEvents = false;
     public override void OnInspectorGUI()
     {
-        ScaryEvent_JJH script = (ScaryEvent_JJH)target;
+        ScaryEvent script = (ScaryEvent)target;
         serializedObject.Update();
 
-        // ScaryEventTier¿Í ScaryEventWhenÀ» DropdownÀ¸·Î Ç¥½Ã
+        // ScaryEventTierï¿½ï¿½ ScaryEventWhenï¿½ï¿½ Dropdownï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
         script.scaryEventTier = (scaryEventTier)EditorGUILayout.EnumPopup("Scary Event Tier", script.scaryEventTier);
         script.scaryEventWhen = (scaryEventWhen)EditorGUILayout.EnumPopup("Scary Event When", script.scaryEventWhen);
 
-        // ÇöÀç Event Target¿¡ ´ëÇÑ ObjectField¸¦ Ç¥½Ã
+        // ï¿½ï¿½ï¿½ï¿½ Event Targetï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ObjectFieldï¿½ï¿½ Ç¥ï¿½ï¿½
         EditorGUILayout.ObjectField("Current Event Target", script.currentEventTarget, typeof(ObjectInfoHolder), true);
 
-        // Á¢È÷°í ÆîÃÄÁö´Â UnityEvent ¼½¼Ç
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UnityEvent ï¿½ï¿½ï¿½ï¿½
         showOnStartEvents = EditorGUILayout.Foldout(showOnStartEvents, "On Start Events");
         if (showOnStartEvents)
-        {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("onStart"), new GUIContent("On Start"));
-        }
 
         showOnPlayEvents = EditorGUILayout.Foldout(showOnPlayEvents, "On Play Events");
         if (showOnPlayEvents)
-        {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("onPlay"), new GUIContent("On Play"));
-        }
 
         showOnUpdateEvents = EditorGUILayout.Foldout(showOnUpdateEvents, "On Update Events");
         if (showOnUpdateEvents)
-        {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("onUpdate"), new GUIContent("On Update"));
-        }
 
         showOnCompleteEvents = EditorGUILayout.Foldout(showOnCompleteEvents, "On Complete Events");
         if (showOnCompleteEvents)
-        {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("onComplete"), new GUIContent("On Complete"));
-        }
 
         serializedObject.ApplyModifiedProperties();
     }
-
-    
-    }
+}

@@ -7,9 +7,8 @@ public class ObjectEventHandler : MonoBehaviour
 {
     public ScaryEvent[] scaryEvents;
     [SerializeField] private ObjectInfoHolder[] startTargets;
-    public ObjectInfoHolder targrt;
+    public ObjectInfoHolder targrt;  //이거 필요 없는거 아닌가??
     
-
     private void Start()
     {
         scaryEvents = FindObjectsOfType<ScaryEvent>();
@@ -22,7 +21,6 @@ public class ObjectEventHandler : MonoBehaviour
         }
     }
    
-
     public void Match(ObjectInfoHolder objectInfoHolder,scaryEventWhen eventWhen) 
     {
         for (int i = 0; i < scaryEvents.Length; i++)
@@ -39,11 +37,5 @@ public class ObjectEventHandler : MonoBehaviour
                 //scaryEvents.Add()
             }
         }
-
-        
-        
-
     }
-
-    
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ScaryEvent : MonoBehaviour
+public class ScaryEvent_Pre : MonoBehaviour
 {
     public List<ScaryEffect> scaryEffects;
     public scaryEventTier scaryEventTier;
