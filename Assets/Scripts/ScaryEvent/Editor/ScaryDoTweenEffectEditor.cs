@@ -1,22 +1,26 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(ScaryDoTweenEffect_JJH))]
-public class ScaryDoTweenEffectEditor_JJH : Editor
+[CustomEditor(typeof(ScaryDoTweenEffect))]
+public class ScaryDoTweenEffectEditor : Editor
 {
     SerializedProperty doTweenTypeProp;
     SerializedProperty targetPositionProp;
     SerializedProperty targetRotationProp;
     SerializedProperty targetScaleProp;
+    SerializedProperty shakePositionProp;
+    SerializedProperty easeProp;
     SerializedProperty durationProp;
 
     void OnEnable()
     {
-        // ¼Ó¼ºµéÀ» ÃÊ±âÈ­ÇÕ´Ï´Ù.
+        // ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½Õ´Ï´ï¿½.
         doTweenTypeProp = serializedObject.FindProperty("doTweenType");
         targetPositionProp = serializedObject.FindProperty("targetPosition");
         targetRotationProp = serializedObject.FindProperty("targetRotation");
         targetScaleProp = serializedObject.FindProperty("targetScale");
+        shakePositionProp = serializedObject.FindProperty("shakePosition");
+        easeProp = serializedObject.FindProperty("ease");
         durationProp = serializedObject.FindProperty("duration");
     }
 
@@ -28,7 +32,7 @@ public class ScaryDoTweenEffectEditor_JJH : Editor
 
         DoTweenType currentType = (DoTweenType)doTweenTypeProp.enumValueIndex;
 
-        // ¼±ÅÃµÈ DoTweenType¿¡ µû¶ó ¼Ó¼ºÀ» º¸¿©ÁÝ´Ï´Ù.
+        // ï¿½ï¿½ï¿½Ãµï¿½ DoTweenTypeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ý´Ï´ï¿½.
         switch (currentType)
         {
             case DoTweenType.Move:
@@ -40,9 +44,13 @@ public class ScaryDoTweenEffectEditor_JJH : Editor
             case DoTweenType.Scale:
                 EditorGUILayout.PropertyField(targetScaleProp);
                 break;
+            case DoTweenType.Shake:
+                EditorGUILayout.PropertyField(shakePositionProp);
+                break;
         }
 
-        // DurationÀº Ç×»ó º¸¿©ÁÝ´Ï´Ù.
+        // Durationï¿½ï¿½ ï¿½×»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ý´Ï´ï¿½.
+        EditorGUILayout.PropertyField(easeProp);
         EditorGUILayout.PropertyField(durationProp);
 
         serializedObject.ApplyModifiedProperties();

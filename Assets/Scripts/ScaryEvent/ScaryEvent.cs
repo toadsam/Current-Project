@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class ScaryEvent_JJH : MonoBehaviour
+public class ScaryEvent : MonoBehaviour
 {
-    public List<ScaryEffect> scaryEffects;
     public scaryEventTier scaryEventTier;
     public scaryEventWhen scaryEventWhen;
     
@@ -22,14 +21,6 @@ public class ScaryEvent_JJH : MonoBehaviour
         currentIndexForTargets.Add("audio", 0);
         currentIndexForTargets.Add("transform", 0);
     }
-   
-
-    public void StartEvent()
-    {
-        for (int i = 0; i < scaryEffects.Count; i++)
-            scaryEffects[i].StartEffect();
-    }
-    
 
     public T GetCurrentTarget<T>(string targetType) where T : UnityEngine.Object {
         int index = currentIndexForTargets.ContainsKey(targetType) ? currentIndexForTargets[targetType] : 0;
@@ -45,7 +36,7 @@ public class ScaryEvent_JJH : MonoBehaviour
             currentIndexForTargets[key] = 0;
     }
     
-    public void StartEffect()
+    public void StartEvent()
     {
         onStart.Invoke();
         onPlay.Invoke();

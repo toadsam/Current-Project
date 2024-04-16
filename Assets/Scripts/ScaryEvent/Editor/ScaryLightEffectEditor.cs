@@ -1,29 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEditor;
-using UnityEditor;
-using UnityEngine;
 
-[CustomEditor(typeof(ScaryLightEffect_JJH))]
-public class ScaryLightEffectEditor_JJH : Editor
+[CustomEditor(typeof(ScaryLightEffect))]
+public class ScaryLightEffectEditor : Editor
 {
-    SerializedProperty lightComponentProp;
     SerializedProperty effectTypeProp;
+    SerializedProperty lightComponentProp;
     SerializedProperty targetColorProp;
     SerializedProperty targetIntensityProp;
-    SerializedProperty flickerDurationProp;
+    SerializedProperty targetIndirectMultiplierProp;
+    SerializedProperty targetShadowTypeProp;
+    SerializedProperty targetDrawHaloProp;
     SerializedProperty durationProp;
 
     void OnEnable()
     {
-        // ¼Ó¼ºµéÀ» SerializedProperty·Î Ã£¾Æ ÃÊ±âÈ­
-        lightComponentProp = serializedObject.FindProperty("lightComponent");
+        // ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½ SerializedPropertyï¿½ï¿½ Ã£ï¿½ï¿½ ï¿½Ê±ï¿½È­
         effectTypeProp = serializedObject.FindProperty("effectType");
+        lightComponentProp = serializedObject.FindProperty("lightComponent");
         targetColorProp = serializedObject.FindProperty("targetColor");
         targetIntensityProp = serializedObject.FindProperty("targetIntensity");
-        flickerDurationProp = serializedObject.FindProperty("flickerDuration");
+        targetIndirectMultiplierProp = serializedObject.FindProperty("targetIndirectMultiplier");
+        targetShadowTypeProp = serializedObject.FindProperty("targetShadowType");
+        targetDrawHaloProp = serializedObject.FindProperty("targetDrawHalo");
         durationProp = serializedObject.FindProperty("duration");
     }
 
@@ -35,12 +36,13 @@ public class ScaryLightEffectEditor_JJH : Editor
 
         LightEffectType effectType = (LightEffectType)effectTypeProp.enumValueIndex;
 
-        // ¼±ÅÃµÈ EffectType¿¡ µû¶ó °ü·Ã ¼Ó¼º¸¸ Ç¥½Ã
+        // ï¿½ï¿½ï¿½Ãµï¿½ EffectTypeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
         switch (effectType)
         {
             case LightEffectType.Flicker:
                 EditorGUILayout.PropertyField(lightComponentProp);
-                EditorGUILayout.PropertyField(flickerDurationProp);
+                EditorGUILayout.PropertyField(targetIntensityProp);
+                EditorGUILayout.PropertyField(durationProp);
                 break;
             case LightEffectType.ColorChange:
                 EditorGUILayout.PropertyField(lightComponentProp);
@@ -53,7 +55,6 @@ public class ScaryLightEffectEditor_JJH : Editor
                 EditorGUILayout.PropertyField(durationProp);
                 break;
         }
-
         serializedObject.ApplyModifiedProperties();
     }
 }
